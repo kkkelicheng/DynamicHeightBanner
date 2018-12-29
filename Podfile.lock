@@ -1,0 +1,15 @@
+PODS:
+  - Kingfisher (4.10.1)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - Kingfisher (~> 4.10.1)
+  - SnapKit
+
+SPEC CHECKSUMS:
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 5441b9e9b38ac9aec826db644bd8975e533969da
+
+COCOAPODS: 1.4.0
