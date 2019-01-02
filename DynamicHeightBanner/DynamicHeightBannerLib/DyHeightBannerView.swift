@@ -19,7 +19,7 @@ class DyHeightBannerView: UIView {
         c.dataSource = self
         c.isPagingEnabled = true
         c.backgroundColor = .white
-        c.showsHorizontalScrollIndicator = true
+        c.showsHorizontalScrollIndicator = false
         c.register(DyHeightBannerCell.self, forCellWithReuseIdentifier: String(describing: DyHeightBannerCell.self))
         return c
     }()
@@ -41,7 +41,12 @@ class DyHeightBannerView: UIView {
                 }
                 blockRefs.append(block)
             }
-            collectionView.reloadData()
+            //刷新数据 1.改变collectview的高度 2.设置初始位置 3.改变自身的高度
+            self.calculateMaxHeight()
+            directScrollToIndex(1)
+            let height = self.bannerDataSource[0].dy_height
+            self.borderRectHeight = height
+            dotView.setPageCount(bannerDataSource.count)
         }
     }
     var blockRefs : [NSKeyValueObservation] = []
@@ -76,18 +81,19 @@ class DyHeightBannerView: UIView {
         }
     }
     
-    let dotView : UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .red
+    let dotView : DyPageDotView = {
+        let view = DyPageDotView(frame: .zero)
+        view.backgroundColor = .clear
         view.snp.makeConstraints({ (maker) in
-            maker.width.equalTo(60)
             maker.height.equalTo(20)
         })
         return view
     }()
     
     var scrollIndex : Int {
-       return Int(roundf(Float(self.collectionView.contentOffset.x / UIScreen.main.bounds.width)))
+        get{
+            return Int(roundf(Float(self.collectionView.contentOffset.x / UIScreen.main.bounds.width)))
+        }
     }
     
     //是否需要改变高度
@@ -95,8 +101,6 @@ class DyHeightBannerView: UIView {
     
     //是否需要改变自身的框高
     var shouldUpdateSelfHeight:Bool = true
-    
-    var isFirstLoad : Bool = true
     
     //当前滑动到的index
     var currentIndex : Int {
@@ -138,8 +142,8 @@ class DyHeightBannerView: UIView {
         
         addSubview(dotView)
         dotView.snp.makeConstraints { (maker) in
+            maker.left.right.equalToSuperview()
             maker.bottom.equalToSuperview().offset(-pageDotToBannerBottom)
-            maker.centerX.equalToSuperview()
         }
         
         self.snp.makeConstraints { (maker) in
@@ -179,6 +183,9 @@ class DyHeightBannerView: UIView {
     }
     
     func directScrollToIndex(_ index:Int){
+        if bannerDataSource.count < 1 {
+            return
+        }
         shouldChangeHeight = false
         collectionView.scrollToItem(at: IndexPath(item:index, section: 0), at: .left, animated: false)
         shouldChangeHeight = true
@@ -200,10 +207,6 @@ class DyHeightBannerView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if isFirstLoad {
-            directScrollToIndex(1)
-            isFirstLoad = false
-        }
     }
 }
 
@@ -249,6 +252,7 @@ extension DyHeightBannerView {
                 let model = bannerDataSource[realIndex]
                 print("didEnd scrollViewDidScroll index:\(scrollIndex) realindex:\(realIndex)  model height : \(model.dy_height)")
                 self.borderRectHeight = model.dy_height
+                self.dotView.currentPage = realIndex
             }
             else {
                 let percent = (scrollView.contentOffset.x - CGFloat(leftIndex) * scroll_w) / scroll_w

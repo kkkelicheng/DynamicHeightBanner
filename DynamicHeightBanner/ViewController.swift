@@ -25,15 +25,11 @@ class ViewController: UIViewController {
         }
         banner.bannerDataSource = [b1,b2,b3]
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            b1.dy_height = 300
-            b2.dy_height = 500
-            b3.dy_height = 700
-        }
-        
-        blockRef = b1.observe(\.dy_height, changeHandler: { (model, value) in
-            print("blockRefblockRefblockRef ")
-        })
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            b1.dy_height = 300
+//            b2.dy_height = 500
+//            b3.dy_height = 700
+//        }
     }
 
 

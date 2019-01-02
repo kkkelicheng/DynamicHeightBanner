@@ -17,6 +17,8 @@
 		A49A683D21D7334C0002FA54 /* DyHeightBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49A683C21D7334C0002FA54 /* DyHeightBannerCell.swift */; };
 		A49A683F21D734490002FA54 /* DyBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49A683E21D734490002FA54 /* DyBannerModel.swift */; };
 		A49A684121D743C50002FA54 /* DyHeightBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49A684021D743C50002FA54 /* DyHeightBannerView.swift */; };
+		A4E9DAD721DC8B5E00462FDD /* DyPageDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9DAD621DC8B5E00462FDD /* DyPageDotView.swift */; };
+		A4E9DAD921DC9DB600462FDD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4E9DAD821DC9DB600462FDD /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		A49A683C21D7334C0002FA54 /* DyHeightBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyHeightBannerCell.swift; sourceTree = "<group>"; };
 		A49A683E21D734490002FA54 /* DyBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyBannerModel.swift; sourceTree = "<group>"; };
 		A49A684021D743C50002FA54 /* DyHeightBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyHeightBannerView.swift; sourceTree = "<group>"; };
+		A4E9DAD621DC8B5E00462FDD /* DyPageDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyPageDotView.swift; sourceTree = "<group>"; };
+		A4E9DAD821DC9DB600462FDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E5032A05A3AB09F38ECAF5B0 /* Pods-DynamicHeightBanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicHeightBanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DynamicHeightBanner/Pods-DynamicHeightBanner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,10 +96,12 @@
 		A49A683921D731AF0002FA54 /* DynamicHeightBannerLib */ = {
 			isa = PBXGroup;
 			children = (
+				A4E9DAD821DC9DB600462FDD /* README.md */,
 				A49A683A21D732110002FA54 /* DynamicHeightProtocol.swift */,
 				A49A683C21D7334C0002FA54 /* DyHeightBannerCell.swift */,
 				A49A683E21D734490002FA54 /* DyBannerModel.swift */,
 				A49A684021D743C50002FA54 /* DyHeightBannerView.swift */,
+				A4E9DAD621DC8B5E00462FDD /* DyPageDotView.swift */,
 			);
 			path = DynamicHeightBannerLib;
 			sourceTree = "<group>";
@@ -171,6 +177,7 @@
 			files = (
 				A49A683221D731960002FA54 /* LaunchScreen.storyboard in Resources */,
 				A49A682F21D731960002FA54 /* Assets.xcassets in Resources */,
+				A4E9DAD921DC9DB600462FDD /* README.md in Resources */,
 				A49A682D21D731940002FA54 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +248,7 @@
 				A49A683F21D734490002FA54 /* DyBannerModel.swift in Sources */,
 				A49A682A21D731940002FA54 /* ViewController.swift in Sources */,
 				A49A684121D743C50002FA54 /* DyHeightBannerView.swift in Sources */,
+				A4E9DAD721DC8B5E00462FDD /* DyPageDotView.swift in Sources */,
 				A49A683B21D732110002FA54 /* DynamicHeightProtocol.swift in Sources */,
 				A49A682821D731940002FA54 /* AppDelegate.swift in Sources */,
 				A49A683D21D7334C0002FA54 /* DyHeightBannerCell.swift in Sources */,
@@ -393,7 +401,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5375HS528S;
 				INFOPLIST_FILE = DynamicHeightBanner/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shushangyun.DynamicHeightBanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -409,7 +420,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5375HS528S;
 				INFOPLIST_FILE = DynamicHeightBanner/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shushangyun.DynamicHeightBanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
