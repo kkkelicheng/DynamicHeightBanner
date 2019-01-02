@@ -32,18 +32,32 @@ class DyHeightBannerView: UIView {
         return layout
     }()
     
-    var bannerDataSource : [DyBannerModel] = []
-    
+    var bannerDataSource : [DyBannerModel] = [] {
+        didSet{
+            blockRefs.removeAll()
+            for item in bannerDataSource {
+                let block = item.observe(\.dy_height) {[weak self] (model, changedValue) in
+                    self?.modelHeightChanged()
+                }
+                blockRefs.append(block)
+            }
+            collectionView.reloadData()
+        }
+    }
+    var blockRefs : [NSKeyValueObservation] = []
+
     
     //默认是屏幕的宽度
     var collectionViewMaxHeight : CGFloat = 0 {
         didSet{
             if collectionViewMaxHeight != oldValue {
-                collectionView.snp.makeConstraints { (maker) in
+                collectionView.snp.updateConstraints { (maker) in
                     maker.height.equalTo(collectionViewMaxHeight)
                 }
                 setNeedsLayout()
                 layoutIfNeeded()
+                //内部cell的高度也变化了
+                collectionView.reloadData()
             }
             
         }
@@ -76,9 +90,24 @@ class DyHeightBannerView: UIView {
        return Int(roundf(Float(self.collectionView.contentOffset.x / UIScreen.main.bounds.width)))
     }
     
+    //是否需要改变高度
     var shouldChangeHeight:Bool = true
     
+    //是否需要改变自身的框高
+    var shouldUpdateSelfHeight:Bool = true
+    
     var isFirstLoad : Bool = true
+    
+    //当前滑动到的index
+    var currentIndex : Int {
+        get {
+            if bannerDataSource.count < 1 {
+                return 0
+            }
+            let scrollIndex = self.scrollIndex
+            return getRealIndexFromScrollItemIndex(scrollIndex)
+        }
+    }
     
  //----------------------------------properties end------------------------------------------
     
@@ -87,13 +116,13 @@ class DyHeightBannerView: UIView {
     
     
     
-    init(frame: CGRect , source:[DyBannerModel]) {
+    init(frame: CGRect , source:[DyBannerModel] = []) {
         super.init(frame: frame)
         self.backgroundColor = .white
-//        self.clipsToBounds = true
+        self.clipsToBounds = true
         self.bannerDataSource = source
-        calculateMaxHeight()
         configSubviews()
+        calculateMaxHeight()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -155,6 +184,20 @@ class DyHeightBannerView: UIView {
         shouldChangeHeight = true
     }
     
+    //模型数据高度变化产生
+    func modelHeightChanged(){
+        //改变collectionview的高度
+        self.calculateMaxHeight()
+        //在非drag下变化自己的框高
+        if self.shouldUpdateSelfHeight{
+            let index = self.currentIndex
+            if index < self.bannerDataSource.count {
+                let height = self.bannerDataSource[index].dy_height
+                self.borderRectHeight = height
+            }
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         if isFirstLoad {
@@ -184,10 +227,6 @@ extension DyHeightBannerView: UICollectionViewDelegate , UICollectionViewDataSou
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("%s",#function)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width:collectionView.bounds.width ,height:collectionViewMaxHeight)
     }
@@ -208,7 +247,7 @@ extension DyHeightBannerView {
             if leftIndex == rightIndex {
                 let realIndex = getRealIndexFromScrollItemIndex(Int(leftIndex))
                 let model = bannerDataSource[realIndex]
-                print("scrollViewDidScroll index:\(scrollIndex) realindex:\(realIndex)  model height : \(model.dy_height)")
+                print("didEnd scrollViewDidScroll index:\(scrollIndex) realindex:\(realIndex)  model height : \(model.dy_height)")
                 self.borderRectHeight = model.dy_height
             }
             else {
@@ -217,7 +256,7 @@ extension DyHeightBannerView {
                 let rightModel = bannerDataSource[getRealIndexFromScrollItemIndex(Int(rightIndex))]
                 let diffSpace = (rightModel.dy_height - leftModel.dy_height) * percent
                 let rectHeight = leftModel.dy_height + diffSpace
-                print("scrollViewDidScroll  index:\(scrollIndex)  rectHeight  : \(rectHeight)")
+                print("transition scrollViewDidScroll  index:\(scrollIndex)  rectHeight  : \(rectHeight)")
                 self.borderRectHeight = rectHeight
             }
         }
@@ -231,11 +270,12 @@ extension DyHeightBannerView {
         else if self.scrollIndex == bannerDataSource.count + 2 - 1{ //现在是最后一个位置,对应的其实是数组中的第一个数据,也就是第二个cell
             directScrollToIndex(1)
         }
+        shouldUpdateSelfHeight = false
     }
     
-    //MARK: todo....
-    //需要在没有drag的时候进行更新更新
-    //calculateMaxHeight collectionview的高度
-    //自身高度由于在滑动的时候会自己计算
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        shouldUpdateSelfHeight = true
+    }
+
 }
 

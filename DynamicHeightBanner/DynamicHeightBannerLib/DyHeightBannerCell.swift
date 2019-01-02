@@ -14,6 +14,7 @@ class DyHeightBannerCell: UICollectionViewCell {
     lazy var imageView : UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .yellow
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     var blockRef : NSKeyValueObservation!
@@ -40,6 +41,7 @@ class DyHeightBannerCell: UICollectionViewCell {
             self?.layoutIfNeeded()
         })
         
+        //这里发布时候改变下策略
         imageView.kf.setImage(with: url, placeholder: nil, options: [.forceRefresh], progressBlock: nil) {[weak self] (image, error, cacheType, url) in
             if let sSelf = self ,let downImage = image {
                 let width = sSelf.bounds.width
@@ -48,6 +50,8 @@ class DyHeightBannerCell: UICollectionViewCell {
                 sSelf.model.dy_height = height
             }
         }
+        
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTaped)))
     }
     
     override func layoutSubviews() {
@@ -56,4 +60,7 @@ class DyHeightBannerCell: UICollectionViewCell {
         imageView.frame = imageFrame
     }
     
+    @objc func imageViewTaped(){
+        print("imageViewTaped \(model)")
+    }
 }
