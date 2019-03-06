@@ -1,6 +1,8 @@
 
 # 例子:
 ```
+//当然你可以去继承DyBannerModel, DyBannerModel当前只关心imageUrl和默认的高度.
+
 let b1 = DyBannerModel(imageUrl: "", initialHeight: 200)
 let b2 = DyBannerModel(imageUrl: "", initialHeight: 600)
 let b3 = DyBannerModel(imageUrl: "", initialHeight: 400)
@@ -21,8 +23,20 @@ banner.bannerDataSource = [b1,b2,b3]
 
 ```
 
+
 同样的,初始化以后进行后续设置bannerDataSource也可以的
 
-* 不足:
+## 效果图
+![效果图](https://github.com/kkkelicheng/DynamicHeightBanner/blob/master/DynamicHeightBanner/bannnner.gif)
+
+-----
+
+![效果图](https://github.com/kkkelicheng/DynamicHeightBanner/blob/master/DynamicHeightBanner/imagebanner.gif)
+
+
+## 不足:
 1. 因为弄的复制个数太少了,我这个就复制了一次.所以在图片少的时候不会那么顺畅. SD那个库是复制了500个貌似.我这个后续有需求会优化的
-2. 可能有未知bug
+
+## 可能有未知bug
+欢迎来issue 
+
