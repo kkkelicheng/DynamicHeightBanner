@@ -19,6 +19,7 @@ class DyHeightBannerView: UIView {
         c.dataSource = self
         c.isPagingEnabled = true
         c.backgroundColor = .white
+        c.bounces = false
         c.showsHorizontalScrollIndicator = false
         c.register(DyHeightBannerCell.self, forCellWithReuseIdentifier: String(describing: DyHeightBannerCell.self))
         return c
@@ -41,6 +42,7 @@ class DyHeightBannerView: UIView {
                 }
                 blockRefs.append(block)
             }
+            self.collectionView.reloadData()
             //刷新数据 1.改变collectview的高度 2.设置初始位置 3.改变自身的高度
             self.calculateMaxHeight()
             directScrollToIndex(1)
