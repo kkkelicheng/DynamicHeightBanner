@@ -20,7 +20,6 @@
 		A4AC71C6222FDFD7003FCFC2 /* bannnner.gif in Resources */ = {isa = PBXBuildFile; fileRef = A4AC71C5222FDFD7003FCFC2 /* bannnner.gif */; };
 		A4AC71C8222FDFDC003FCFC2 /* imagebanner.gif in Resources */ = {isa = PBXBuildFile; fileRef = A4AC71C7222FDFDC003FCFC2 /* imagebanner.gif */; };
 		A4E9DAD721DC8B5E00462FDD /* DyPageDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9DAD621DC8B5E00462FDD /* DyPageDotView.swift */; };
-		A4E9DAD921DC9DB600462FDD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4E9DAD821DC9DB600462FDD /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 		A4AC71C5222FDFD7003FCFC2 /* bannnner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bannnner.gif; sourceTree = "<group>"; };
 		A4AC71C7222FDFDC003FCFC2 /* imagebanner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = imagebanner.gif; sourceTree = "<group>"; };
 		A4E9DAD621DC8B5E00462FDD /* DyPageDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyPageDotView.swift; sourceTree = "<group>"; };
-		A4E9DAD821DC9DB600462FDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E5032A05A3AB09F38ECAF5B0 /* Pods-DynamicHeightBanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicHeightBanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DynamicHeightBanner/Pods-DynamicHeightBanner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +100,6 @@
 		A49A683921D731AF0002FA54 /* DynamicHeightBannerLib */ = {
 			isa = PBXGroup;
 			children = (
-				A4E9DAD821DC9DB600462FDD /* README.md */,
 				A49A683A21D732110002FA54 /* DynamicHeightProtocol.swift */,
 				A49A683C21D7334C0002FA54 /* DyHeightBannerCell.swift */,
 				A49A683E21D734490002FA54 /* DyBannerModel.swift */,
@@ -184,7 +181,6 @@
 				A4AC71C6222FDFD7003FCFC2 /* bannnner.gif in Resources */,
 				A49A683221D731960002FA54 /* LaunchScreen.storyboard in Resources */,
 				A49A682F21D731960002FA54 /* Assets.xcassets in Resources */,
-				A4E9DAD921DC9DB600462FDD /* README.md in Resources */,
 				A4AC71C8222FDFDC003FCFC2 /* imagebanner.gif in Resources */,
 				A49A682D21D731940002FA54 /* Main.storyboard in Resources */,
 			);
